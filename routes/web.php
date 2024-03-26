@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\About;
 use App\Http\Controllers\SocialController;
-use App\Http\Controllers\SkillsController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\TalentController;
 
 Auth::routes();
 
@@ -28,7 +28,6 @@ Route::get('/download/resume/{id}', function ($id) {
 Route::resource('/social', SocialController::class);
 
 // route for skill experience //
-Route::resource('/skill', SkillsController::class);
-
+Route::resource('/talent',TalentController::class);
 //Route for Job
 Route::resource('/jobs', JobController::class);
