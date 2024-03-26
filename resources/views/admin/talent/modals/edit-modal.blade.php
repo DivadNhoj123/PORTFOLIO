@@ -1,4 +1,4 @@
-<div class="modal fade" id="edit{{ $skill->id }}" tabindex="-1" role="dialog" aria-labelledby="edit" style="display: none;"
+<div class="modal fade" id="edit-modal{{ $talent->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -6,21 +6,29 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="tim-icons icon-simple-remove "></i>
                 </button>
-                <h6 class="title title-up">Edit Skill</h6>
+                <h6 class="title title-up">Edit Social Media Links</h6>
             </div>
-            <form action="{{ route('skill.update', $skill->id) }}" method="POST" >
+            {{-- <form action="{{ route('talents.update', $talent->id) }}" method="POST" id="edit-form"> --}}
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" class="form-control text-dark" name="skill" value="{{ $skill->skill }}">
+                                <input type="text" class="form-control text-dark" name="talent" value="{{ $talent->talent }}" required>
                             </div>
                         </div>
-                        <div class="col-md-5">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control text-dark" name="range" value="{{ $skill->range }}">
+                                <input type="text" class="form-control text-dark" name="position" value="{{ $talent->position }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="date" class="form-control text-dark" name="year" value="{{ $talent->year }}" required>
                             </div>
                         </div>
                     </div>

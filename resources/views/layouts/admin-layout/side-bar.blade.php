@@ -39,7 +39,7 @@
                 <div class="collapse" id="pagesExamples" style="">
                     <ul class="nav">
                         <li>
-                            <a href="{{ route('skill.index') }}">
+                            <a href="{{ route('talent.index') }}">
                                 <span class="sidebar-mini-icon">P</span>
                                 <span class="sidebar-normal"> Skills </span>
                             </a>

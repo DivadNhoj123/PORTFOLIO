@@ -1,6 +1,44 @@
 <script src="{{ asset('black-template') }}/vendors/sweet-alert/sweetalert.min.js"></script>
+<script src="{{ asset('black-template') }}/vendors/dropify/dropify.min.js"></script>
 <script>
     $(document).ready(function() {
+        //dropify //
+        $('.dropify').dropify();
+
+        $('.dropify-fr').dropify({
+            messages: {
+                default: 'Glissez-déposez un fichier ici ou cliquez',
+                replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+                remove: 'Supprimer',
+                error: 'Désolé, le fichier trop volumineux'
+            }
+        });
+
+        var drEvent = $('#input-file-events').dropify();
+
+        drEvent.on('dropify.beforeClear', function(event, element) {
+            return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+        });
+
+        drEvent.on('dropify.afterClear', function(event, element) {
+            alert('File deleted');
+        });
+
+        drEvent.on('dropify.errors', function(event, element) {
+            console.log('Has Errors');
+        });
+
+        var drDestroy = $('#input-file-to-destroy').dropify();
+        drDestroy = drDestroy.data('dropify')
+        $('#toggleDropify').on('click', function(e) {
+            e.preventDefault();
+            if (drDestroy.isDropified()) {
+                drDestroy.destroy();
+            } else {
+                drDestroy.init();
+            }
+        })
+
         function showNotification(from, align, type, message) {
             $.notify({
                 icon: "tim-icons icon-bell-55",
@@ -19,26 +57,14 @@
         @if (session()->has('notification'))
             var notificationMessage = '{{ session('notification') }}';
             showNotification('top', 'center', 'success', notificationMessage);
+            console.log(notificationMessage);
         @endif
 
-        $('#skillForm').submit(function(event) {
-            event.preventDefault();
-            var form = $(this);
+        $('#add-form').submit(function(event) {
 
-            $.ajax({
-                type: form.attr('method'),
-                url: form.attr('action'),
-                data: form.serialize(),
-                success: function(data) {
-                    window.location.reload();
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
         });
 
-        $('#editSkill').submit(function(event) {});
+        $('#edit-form').submit(function(event) {});
     });
 
     $('.delete').on('click', function() {
@@ -65,7 +91,7 @@
             }
         }).then((confirmed) => {
             if (confirmed) {
-                let route = "{{ route('skill.destroy', '__id__') }}";
+                let route = "{{ route('jobs.destroy', '__id__') }}";
                 route = route.replace('__id__', deleteId);
 
                 $.ajax({
