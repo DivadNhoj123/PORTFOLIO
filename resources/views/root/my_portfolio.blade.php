@@ -25,6 +25,7 @@
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -57,7 +58,7 @@
                 <ul>
                     <li><a class="nav-link active" href="#header">Home</a></li>
                     <li><a class="nav-link" href="#about">About</a></li>
-                    <li><a class="nav-link" href="#resume">Resume</a></li>
+                    <li><a class="nav-link" href="#resume">Blog</a></li>
                     {{-- <li><a class="nav-link" href="#services">Services</a></li> --}}
                     {{-- <li><a class="nav-link" href="#portfolio">Portfolio</a></li> --}}
                     <li><a class="nav-link" href="#contact">Contact</a></li>
@@ -93,70 +94,41 @@
             @foreach ($about as $abouts)
                 <div class="row">
                     <div class="col-lg-4" data-aos="fade-right">
-                        <img src="assets/img/Cervantes.jpg" class="img-fluid" alt="">
+                        <img src="{{ asset('storage/uploads/profile/' . $abouts->img) }}" class="img-fluid"
+                            alt="">
                     </div>
-                    <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-                        <h3>Frontend Developer &amp; Backend Developer</h3>
-                        <p class="fst-italic">
-                            Passionate about crafting seamless digital experiences through innovative frontend and
-                            backend development.
-                        </p>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Birthday:</strong>
-                                        <span>{{ $abouts->birthday }}</span>
-                                    </li>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Website:</strong>
-                                        <span>{{ $abouts->website }}</span>
-                                    </li>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Phone:</strong>
-                                        <span>{{ $abouts->phone }}</span>
-                                    </li>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>City:</strong>
-                                        <span>{{ $abouts->address }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Age:</strong>
-                                        <span>{{ $abouts->age }}</span>
-                                    </li>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Degree:</strong>
-                                        <span>{{ $abouts->degree }}</span>
-                                    </li>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Email:</strong>
-                                        <span>{{ $abouts->email }}</span>
-                                    </li>
-                                    <li>
-                                        <i class="bi bi-chevron-right"></i>
-                                        <strong>Freelance:</strong>
-                                        <span>{{ $abouts->freelance }}</span>
-                                    </li>
-                                </ul>
+                    <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch float-end" data-aos="fade-left"
+                        style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; text-align: justify;">
+                        <!-- Your content here -->
+                        <div class="info-box">
+                            <h3>Let's Get Started...</h3>
+                            <p class="fst-italic">
+                                Passionate about crafting seamless digital experiences through innovative frontend and
+                                backend development.
+                            </p>
+                            <p>
+                                I am dedicated to solving complex problems and thrive in collaborative environments.
+                                With a degree in {{ $abouts->degree }},
+                                I bring a solid foundation in computer science to every project. Let's build something
+                                amazing together!
+                            </p>
+                            <p>
+                                Here are some details about me:
+                            </p>
+                            <p>
+                                My birthday is {{ $abouts->birthday }}, and you can find me at {{ $abouts->address }}.
+                                Feel free to visit my website {{ $abouts->website }} or contact me at
+                                {{ $abouts->email }} or {{ $abouts->phone }}. I'm {{ $abouts->age }} years old and
+                                currently open to freelance opportunities.
+                            </p>
+                            <p>
+                                Looking forward to connecting and collaborating on exciting projects!
+                            </p>
+                            <div class="text-center">
+                                <a href="{{ route('download.resume', $abouts->id) }}"
+                                    class="btn btn-block btn-success">Download CV</a>
                             </div>
                         </div>
-                        <p>
-                            I am dedicated to solving complex problems and thrive in collaborative environments. With a
-                            degree in {{ $abouts->degree }},
-                            I bring a solid foundation in computer science to every project. Let's build something
-                            amazing together!
-                        </p>
                     </div>
                 </div>
             @endforeach
@@ -171,11 +143,11 @@
                 <h2>Skills</h2>
             </div>
             <div class="row">
-                @foreach ($skills as $skill )
-                    <div class="col-lg-3 col-md-4 mb-3">
+                @foreach ($skills as $skill)
+                    <div class="col-lg-3 col-md-4 mb-3" data-aos="zoom-out-down">
                         <div class="icon-box">
                             <img src="{{ asset('storage/uploads/language/' . $skill->img) }}">
-                            <h3 class="text-capitalize">{{ $skill->talent }}</h3>
+                            <h3 class="text-uppercase"  style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">{{ $skill->talent }}</h3>
                         </div>
                     </div>
                 @endforeach
@@ -184,203 +156,33 @@
         <!-- End Skills -->
 
         <!-- ======= Experience ======= -->
-            <div class="interests container">
+        <div class="interests container">
 
-                <div class="section-title">
-                    <h2>Experiences</h2>
-                </div>
-
-
+            <div class="section-title">
+                <h2>Experiences</h2>
             </div>
 
-            <div class="counts container">
-                <div class="row">
-                    @foreach ($job as $job )
-                    <div class="col-lg-3 col-md-6">
-                        <div class="count-box">
+
+        </div>
+
+        <div class="counts container">
+            <div class="row">
+                @foreach ($job as $job)
+                    <div class="col-lg-3 col-md-6" data-aos="zoom-out-right">
+                        <div class="count-box"  style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">
                             <img src="{{ asset('storage/uploads/company/' . $job->company_img) }}">
-                            <h6 class="mt-4">{{ $job->company }}</h6>
+                            <h6 class="mt-4 text-uppercase"  style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">{{ $job->company }}</h6>
                             <small>{{ $job->job }}</small>
                         </div>
                     </div>
-                    @endforeach
-                </div>
-
+                @endforeach
             </div>
+
+        </div>
         <!-- End Interests -->
 
     </section>
     <!-- End About Section -->
-
-    <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume">
-        <div class="container">
-
-            <div class="section-title">
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Resume</h2>
-                    </div>
-                    <div class="col-lg-6 text-end">
-                      <button type="button" class="btn btn-success">Download CV</button>
-                    </div>
-                </div>
-                <p>Check My Resume</p>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <h3 class="resume-title">Summary</h3>
-                    <div class="resume-item pb-0">
-                        @foreach ($about as $aboutItem)
-                            <h4>{{ $aboutItem->firstname }}{{ $aboutItem->lastname }}</h4>
-                        @endforeach
-                        <p>
-                            <em>
-                                Innovative and results-driven Web Developer with 3+ years of hands-on experience in
-                                conceptualizing, designing, and implementing dynamic, user-centric websites and web
-                                applications from inception to the final, polished product.
-                            </em>
-                        <p>
-                        <ul>
-                            {{-- @foreach ($about as $aboutItem)
-                                <li>{{ $aboutItem->address }}</li>
-                            @endforeach
-                            @foreach ($contact as $contactItem)
-                                <li>{{ $contactItem->contact_type }}</li>
-                                <li>{{ $contactItem->contact_info }}</li>
-                            @endforeach --}}
-                        </ul>
-                        </p>
-                    </div>
-
-                    <h3 class="resume-title">Education</h3>
-                    <div class="resume-item">
-                        {{-- @foreach ($education as $edu)
-                            <h4>{{ $edu->college }}</h4>
-                            <h5>{{ $edu->college_grad }}</h5>
-                            <p><em>{{ $edu->college_address }}</em></p>
-                        @endforeach --}}
-
-                        <p>
-                            As a web developer, I specialize in creating seamless and responsive online experiences. My
-                            expertise lies in crafting well-architected, visually appealing websites that prioritize
-                            user experience and functionality. From front-end design to back-end development, I am
-                            dedicated to delivering high-quality, performant web solutions.
-                        </p>
-                    </div>
-                    <div class="resume-item">
-                        <h4>Bachelor of Science in Information Technology</h4>
-                        <h5>2023 - 2024</h5>
-                        <p><em>Southern Leyte State University, Tomas Oppus, SL</em></p>
-                        <p>
-                            In my academic journey at Southern Leyte State University, I honed my skills in Information
-                            Technology, providing me with a solid foundation in coding, software development, and system
-                            architecture. My commitment to staying abreast of the latest web technologies ensures that
-                            my work aligns with industry best practices.
-
-                            With a diverse portfolio that showcases a range of web projects, I am well-equipped to
-                            tackle the unique challenges of web development. Let's collaborate to bring your digital
-                            ideas to life, combining creativity and technical proficiency for a standout online
-                            presence.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <h3 class="resume-title">Professional Experience</h3>
-                    {{-- @if ($experience)
-
-                        @foreach ($experience as $experiences)
-                            <div class="resume-item">
-
-                                <h4>{{ $experiences->job }}</h4>
-                                <h5>{{ $experiences->year }} - {{ $experiences->company_address }}</h5>
-                                <p><em>{{ $experiences->position }} </em></p>
-                                <p>
-                                <ul>
-                                    <li>
-                                        Lead the Frontend of Booking System
-                                    </li>
-
-                                </ul>
-                                </p>
-                            </div>
-                        @endforeach
-                    @else
-                        <p> No Experiece yet</p>
-                    @endif --}}
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- End Resume Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Services</h2>
-                <p>My Services</p>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-slideshow"></i></div>
-                        <h4><a href="">Dele cardo</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-arch"></i></div>
-                        <h4><a href="">Divera don</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-    <!-- End Services Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
@@ -638,7 +440,8 @@
             </form>
 
         </div>
-    </section><!-- End Contact Section -->
+    </section>
+    <!-- End Contact Section -->
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -651,7 +454,10 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
