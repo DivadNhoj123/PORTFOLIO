@@ -120,12 +120,19 @@
         });
     });
 </script>
-{{-- <script>
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
+<script>
+    var currentHour = new Date().getHours();
 
-    });
-</script> --}}
+    var greeting;
+    if (currentHour < 12) {
+        greeting = "Good Morning";
+    } else if (currentHour < 18) {
+        greeting = "Good Afternoon";
+    } else {
+        greeting = "Good Night";
+    }
+
+    document.getElementById("greeting").innerText = greeting;
+</script>
 <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
 <script>

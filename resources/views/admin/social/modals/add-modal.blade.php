@@ -22,6 +22,8 @@
                                   <option>youtube</option>
                                   <option>github</option>
                                   <option>tiktok</option>
+                                  <option>instagram</option>
+                                  <option>github</option>
                                 </select>
                               </div>
                         </div>
