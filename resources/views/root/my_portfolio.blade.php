@@ -8,17 +8,11 @@
     <title>David John | Portfolio</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
+    <link href="{{ asset('assets') }}/img/programming.png" rel="icon">
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -26,17 +20,7 @@
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: Personal
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -45,13 +29,15 @@
     <header id="header">
         <div class="container">
 
-            <h1><a href="{{ route('welcome') }}">
+            <h1>
+                <a href="{{ route('welcome') }}">
                     @foreach ($about as $abouts)
                         {{ $abouts->firstname }} {{ $abouts->lastname }}
-                </a></h1>
-            @endforeach
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+                    @endforeach
+                </a>
+            </h1>
+
+            <a href="{{ route('welcome') }}" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
             <h2>I'm a passionate <span>Web Developer</span> from Southern Leyte</h2>
 
             <nav id="navbar" class="navbar">
@@ -59,27 +45,20 @@
                     <li><a class="nav-link active" href="#header">Home</a></li>
                     <li><a class="nav-link" href="#about">About</a></li>
                     <li><a class="nav-link" href="#resume">Blog</a></li>
-                    {{-- <li><a class="nav-link" href="#services">Services</a></li> --}}
-                    {{-- <li><a class="nav-link" href="#portfolio">Portfolio</a></li> --}}
                     <li><a class="nav-link" href="#contact">Contact</a></li>
-                    {{-- <li><a class="nav-link" href="login">Login</a></li> --}}
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
             <div class="social-links">
-                <a href="https://twitter.com/Davidjohn050212" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="https://web.facebook.com/davidjohn.cervantes.5" class="facebook"><i
-                        class="bi bi-facebook"></i></a>
-                <a href="https://www.instagram.com/cervantesolbes/" class="instagram"><i
-                        class="bi bi-instagram"></i></a>
-                <a href="https://www.tiktok.com/@davidjohncervan47" class="linkedin"><i class="bi bi-tiktok"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-github"></i></a>
-
+                @foreach ($links as $link)
+                    <a href="{{ $link->link }}" class="{{ $link->type }}"><i class="bi bi-{{ $link->type }}"></i></a>
+                @endforeach
             </div>
 
         </div>
-    </header><!-- End Header -->
+    </header>
+    <!-- End Header -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -147,7 +126,9 @@
                     <div class="col-lg-3 col-md-4 mb-3" data-aos="zoom-out-down">
                         <div class="icon-box">
                             <img src="{{ asset('storage/uploads/language/' . $skill->img) }}">
-                            <h3 class="text-uppercase"  style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">{{ $skill->talent }}</h3>
+                            <h3 class="text-uppercase"
+                                style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">
+                                {{ $skill->talent }}</h3>
                         </div>
                     </div>
                 @endforeach
@@ -162,16 +143,18 @@
                 <h2>Experiences</h2>
             </div>
 
-
         </div>
 
         <div class="counts container">
             <div class="row">
                 @foreach ($job as $job)
                     <div class="col-lg-3 col-md-6" data-aos="zoom-out-right">
-                        <div class="count-box"  style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">
+                        <div class="count-box"
+                            style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">
                             <img src="{{ asset('storage/uploads/company/' . $job->company_img) }}">
-                            <h6 class="mt-4 text-uppercase"  style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">{{ $job->company }}</h6>
+                            <h6 class="mt-4 text-uppercase"
+                                style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace; ">
+                                {{ $job->company }}</h6>
                             <small>{{ $job->job }}</small>
                         </div>
                     </div>
