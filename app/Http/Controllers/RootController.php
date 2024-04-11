@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\About;
+use App\Models\Social;
 use App\Models\Job;
 use App\Models\Mastery;
 
@@ -12,8 +13,9 @@ class RootController extends Controller
 {
     public function index(){
         $about = About::all();
+        $links = Social::all();
         $job = Job::all();
         $talent = Mastery::all();
-        return view('root.my_portfolio')->with(['about' =>$about, 'job' => $job, 'skills' => $talent]);
+        return view('root.my_portfolio')->with(['about' =>$about, 'job' => $job, 'skills' => $talent, 'links' => $links]);
     }
 }

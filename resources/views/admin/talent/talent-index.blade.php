@@ -5,7 +5,7 @@
         @include('layouts.admin-layout.nav-bar')
         <div class="content">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header">
                             <div class="d-flex align-items-center justify-content-between">
@@ -22,50 +22,49 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive ps ps--active-x">
-                                <table class="table tablesorter " id="">
-                                    <thead class=" text-primary">
+                            <table id="order-listing" class="table dataTable no-footer" role="grid"
+                                aria-describedby="order-listing_info">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Logo</th>
+                                        <th>Skills</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($talents as $talent)
                                         <tr>
-                                            <th>Action</th>
-                                            <th>Logo</th>
-                                            <th>Skills</th>
-                                            <th>Type</th>
+                                            <td>
+                                                <a class="btn btn-sm btn-info" data-toggle="modal"
+                                                    data-target="#edit-modal{{ $talent->id }}">
+                                                    <i class="tim-icons icon-pencil pb-1"></i>
+                                                </a>
+                                                @include('admin.talent.modals.edit-modal')
+                                                <a class="btn btn-sm btn-danger delete" data-id="{{ $talent->id }}">
+                                                    <i class="tim-icons icon-trash-simple pb-1"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <img src="{{ asset('storage/uploads/language/' . $talent->img) }}"
+                                                    class=" avatar mt-3" alt="image">
+                                            </td>
+                                            <td>
+                                                {{ $talent->talent }}
+                                            </td>
+                                            <td>
+                                                @if ($talent->type == 0)
+                                                    Backend
+                                                @elseif($talent->type == 1)
+                                                    Frontend
+                                                @endif
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($talents as $talent)
-                                            <tr>
-                                                <td>
-                                                    <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit-modal{{ $talent->id }}">
-                                                        <i class="tim-icons icon-pencil pb-1"></i>
-                                                    </a>
-                                                    @include('admin.talent.modals.edit-modal')
-                                	                <a class="btn btn-sm btn-danger delete" data-id="{{ $talent->id }}">
-                                                        <i class="tim-icons icon-trash-simple pb-1"></i>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <img src="{{ asset('storage/uploads/language/' . $talent->img) }}" class=" avatar mt-3" alt="image">
-                                                </td>
-                                                <td>
-                                                    {{ $talent->talent}}
-                                                </td>
-                                                <td>
-                                                    @if($talent->type == 0)
-                                                        Backend
-                                                    @elseif($talent->type == 1)
-                                                        Frontend
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforeach
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2"></div>
             </div>
         </div>
         <footer class="footer">
