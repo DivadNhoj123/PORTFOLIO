@@ -57,6 +57,8 @@ class AboutController extends Controller
             'freelance' => 'required',
             'resume' => 'nullable|mimes:pdf'
         ]);
+
+
         if($validated){
 
             $about = About::findOrFail($id);
